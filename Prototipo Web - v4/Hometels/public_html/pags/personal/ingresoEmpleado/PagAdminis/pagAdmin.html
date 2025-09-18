@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel de Control - HomeTels</title>
+  <link rel="stylesheet" href="../../../../css/PersonalPagsStyles/PanelControl/controlAdminStyle.css" />
+  <header>
+    <img id="imgLogo" src="../../../../images/big_logo.png" alt="Logo HomeTels" />
+    <div class="header-buttons">
+      <button>Inicio</button>
+      <button>Reservas</button>
+      <button>Pagos</button>
+      <button>Contacto</button>
+    </div>
+    <button class="account-btn">Perfil</button>
+  </header>
+</head>
+
+<body>
+  <main>
+    <section class="localidades">
+      <h2>Localidades</h2>
+      <ul id="localidades-lista">
+        <!-- Se generan botones con JS -->
+      </ul>
+    </section>
+
+    <section class="hoteles">
+      <h2>Hoteles</h2>
+      <div id="hoteles-contenido">
+        <p class="mensaje-inicial">Seleccione su localidad a administrar</p>
+      </div>
+    </section>
+  </main>
+  <script src="../../../../js/PanelAdmin/Admin.js"></script>
+</body>
+</html>

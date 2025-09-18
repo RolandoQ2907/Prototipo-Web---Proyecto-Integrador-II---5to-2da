@@ -1,0 +1,235 @@
+@font-face {
+    font-family: 'VCR';
+    src: url('../fonts/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'EarlyG';
+    src: url('../fonts/early_gameboy/Early\ GameBoy.ttf') format('truetype');
+    font-weight: normal;
+}
+
+#title1 {
+  font-family: 'VCR';
+  text-align: center;
+  font-size: 45px;
+  color: #56a897;
+
+    /*Animacion de ola de brillo en "Calculadora de Sumas"*/
+  background: linear-gradient(
+    90deg,
+    rgba(86,168,151,1) 0%, 
+    rgba(86,168,151,1) 45%, 
+    rgba(150,230,200,1) 50%,
+    rgba(86,168,151,1) 55%, 
+    rgba(86,168,151,1) 100%
+  );
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: brillo-hola 7s linear infinite;
+}
+
+@keyframes brillo-hola {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+
+body {
+    background: linear-gradient(320deg, #eb92be, #ffef78, #63c9b4);
+    padding: 50px;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-content: center;
+    justify-content: center;
+}
+
+#cont{
+  margin-top: -220px;
+}
+
+#box1{
+    padding: 25px 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.01);
+    box-shadow: 0 4px 30px rgba(35,35,35,0.1);
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    background: rgba(255,255,255, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255,255,255, 0.30);
+    border: 1px solid rgba(255,255,255,0.034);
+    flex-basis: 200px;
+    height: 250px;
+}
+
+/*Botones*/
+#bt1_10{   
+    font-family: 'EarlyG'; 
+    font-size: 14px;
+    color: #772a4f;
+    padding: 15px 20px;
+    background: linear-gradient(to right, #63c9b57f, #eb92bf7d, #ffef788d);
+    border-color:#3c1226;
+    border: 10;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+#bt1_10 span {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+/* Animación de ola solo al poner mouse sobre el botón */
+#bt1_10:hover span {
+  animation: wave 1.2s infinite;
+  animation-fill-mode: both;
+}
+
+/* Retardos escalonados para cada letra */
+#bt1_10:hover span:nth-child(1) { animation-delay: 0s; }
+#bt1_10:hover span:nth-child(2) { animation-delay: 0.1s; }
+#bt1_10:hover span:nth-child(3) { animation-delay: 0.2s; }
+#bt1_10:hover span:nth-child(4) { animation-delay: 0.3s; }
+#bt1_10:hover span:nth-child(5) { animation-delay: 0.4s; }
+#bt1_10:hover span:nth-child(6) { animation-delay: 0.5s; }
+#bt1_10:hover span:nth-child(7) { animation-delay: 0.6s; }
+#bt1_10:hover span:nth-child(8) { animation-delay: 0.7s; }
+#bt1_10:hover span:nth-child(9) { animation-delay: 0.8s; }
+#bt1_10:hover span:nth-child(10) { animation-delay: 0.9s; }
+#bt1_10:hover span:nth-child(11) { animation-delay: 1s; }
+#bt1_10:hover span:nth-child(12) { animation-delay: 1.1s; }
+#bt1_10:hover span:nth-child(13) { animation-delay: 1.2s; }
+#bt1_10:hover span:nth-child(14) { animation-delay: 1.3s; }
+#bt1_10:hover span:nth-child(15) { animation-delay: 1.4s; }
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+
+#btS1{
+    font-family: 'EarlyG';
+    padding: 5px 10px;
+    background-color: #ffef72b0;
+    border: 2px solid #751f07;
+    color: #751f07;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+}
+#btS2{
+    font-family: 'EarlyG';
+    padding: 5px 10px;
+    background-color: #9aff97b0;
+    border-color:#0e3a23;
+    color: #093820;
+    border: 10;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+}
+
+/*Animacion de Escala en "btS1" y "btS2"*/
+/*Agrandar Escala*/
+#btS1:hover,
+#btS2:hover {
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+/*Achicar Escala*/
+#btS1,
+#btS2 {
+  transition: transform 0.3s ease;
+}
+
+
+/*Estilos de los PlaceHolders*/
+/*Placeholder "Escribe un numero"*/
+#ingNum:focus {
+    outline: none;
+    border-color: #ffff00;
+}
+#ingNum::-webkit-input-placeholder {
+  color: rgba(175, 108, 20, 0.75);
+}
+#ingNum{
+    font-family: 'EarlyG';
+    border-radius: 5px;
+    background: linear-gradient(to right, #f1de4bc7, #fdffa0d6);
+    padding: 2px 5px;
+    border: 2px solid #751f07;
+    color: #751f07;
+}
+
+/*Placeholder "Numero inicial"*/
+#numInicio:focus {
+  outline: none;
+  border-color: #66ff61;
+}
+#numInicio::-webkit-input-placeholder {
+  color: rgba(16, 104, 52, 0.75);
+}
+#numInicio{
+    width: 200px;
+    font-family: 'EarlyG';
+    border-radius: 5px;
+    background: linear-gradient(to right, #47c63bc7, #a8ffa0d6);
+    padding: 2px 5px;
+    border: 2px solid #08693c;
+    color: #08693c;
+}
+
+/*Placeholder "Numero final"*/
+#numFinal:focus {
+  outline: none;
+  border-color: #ff0062;
+}
+#numFinal::-webkit-input-placeholder {
+  color: rgba(124, 39, 39, 0.75);
+}
+#numFinal{
+    width: 200px;
+    font-family: 'EarlyG';
+    border-radius: 5px;
+    background: linear-gradient(to right, #ff9595d3, #fc3a3ac6);
+    padding: 2px 5px;
+    border: 2px solid #510a0a;
+    color: #510a0a;
+}
+
+/*Placeholder "Resultado..."*/
+#resultado{
+    font-family: 'EarlyG';
+    padding: 10px;
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    background: rgba(255,255,255, 0.75);
+    border: 1px solid rgba(255,255,255,0.01);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(35,35,35,0.1);
+    color: #80c49c;
+    overflow: auto;
+    margin-top: 20px;
+    font-size: 13px;
+}

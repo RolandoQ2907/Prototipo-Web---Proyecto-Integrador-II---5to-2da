@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ingreso Personal - HomeTels</title>
+  <link rel="stylesheet" href="../../css/pags_styles/menu_hotel1.css" />
+</head>
+<body>
+  <header>
+    <img src="../../images/big_logo.png" alt="Logo del Hotel HomeTels" />
+  </header>
+
+  <div class="circles-container"></div>
+  
+  <main class="container-general">
+    <form id="personal-form" action="#" method="POST">
+      <h2>Ingreso Personal del Hotel</h2>
+
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="nombre" required />
+
+      <label for="documento">Documento de identidad (DNI, pasaporte):</label>
+      <input type="text" id="documento" name="documento" required />
+
+      <label for="cv">Currículum vitae (CV) o resumen:</label>
+      <textarea id="cv" name="cv" rows="4" placeholder="Describe tu experiencia laboral y formación" required></textarea>
+
+      <label for="antecedentes">Certificado de antecedentes penales:</label>
+      <input type="file" id="antecedentes" name="antecedentes" accept=".pdf,.doc,.docx" required />
+
+      <label for="titulos">Títulos o certificados de estudios relacionados:</label>
+      <input type="file" id="titulos" name="titulos" accept=".pdf,.doc,.docx" required />
+
+      <label for="contacto">Información de contacto (teléfono, correo electrónico):</label>
+      <input type="text" id="contacto" name="contacto" placeholder="Ej: +54 9 11 1234 5678 / correo@ejemplo.com" required />
+
+      <label for="disponibilidad">Disponibilidad horaria:</label>
+      <textarea id="disponibilidad" name="disponibilidad" rows="2" placeholder="Indica tus horarios disponibles" required></textarea>
+
+      <div class="campo">
+        <label for="codigo">Código de verificación:</label>
+        <input type="password" id="codigo" name="codigo" placeholder="Ingresa tu código" required />
+        <span class="toggle-pass">Mostrar</span>
+      </div>
+
+      <button type="submit">Ingresar al área de recepcionista</button>
+    </form>
+  </main>
+  <script src="../../js/togglePass.js"></script>
+  <script src="../../js/guardarName.js"></script>
+  <script src="../../js/bg1.js"></script>
+</body>
+</html>

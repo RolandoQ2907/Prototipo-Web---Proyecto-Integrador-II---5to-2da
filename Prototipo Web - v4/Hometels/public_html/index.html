@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HomeTels | Reservas con Seguridad</title>
+  <link rel="stylesheet" href="css/menu_1.css">
+</head>
+<body>
+  <div class="container-general">
+    <header>
+    <!-- Logo del hotel -->
+    <img src="images/big_logo.png" alt="Logo del Hotel HomeTels" />
+    <!-- Botones bloqueados -->
+    <div class="header-buttons">
+      <button disabled>Menú</button>
+      <button disabled>Reservar</button>
+      <button disabled>Pagos</button>
+    </div>
+  </header>
+
+  <!-- Fondo de partículas -->
+  <div class="circles-container"></div>
+
+  <div id="main-container">
+    <p class="description-text">
+      Antes de empezar a navegar, se necesita que ingreses a una de las dos secciones.
+      Seleccione el botón de <strong>Cliente</strong> en caso de que quiera reservar una estadía en nuestro hotel, o en caso contrario,
+      seleccione el botón de <strong>Personal</strong> si eres un miembro del personal del hotel.
+    </p>
+
+    <div class="user-buttons">
+      <!-- Botón Cliente -->
+      <div class="user-button-container">
+        <div id="img1" class="icon-square">
+          <img src="images/icons/icon_client.png" alt="Icono Cliente" />
+        </div>
+        <button onclick="window.location.href='pags/client/menu_client.html'" id="cliente-btn">Cliente</button>
+        <p class="user-button-text">
+          Si usted es un cliente seleccione esta opción para empezar a navegar y reservar en nuestro hotel.
+        </p>
+      </div>
+
+      <!-- Botón Personal -->
+      <div class="user-button-container">
+        <div id="img2" class="icon-square">
+          <img src="images/icons/icon_personal.png" alt="Icono Personal" />
+        </div>
+        <button onclick="window.location.href='pags/personal/menu_hotel.html'" id="personal-btn">Personal</button>
+        <p class="user-button-text">
+          Si usted es parte del personal del hotel seleccione esta opción para empezar a administrar el hotel.
+          Recuerde que tiene que ingresar con los datos requeridos al momento de ser parte del personal del hotel.
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <!-- Script del fondo de partículas debe estar dentro body -->
+  <script src="js/bg1.js"></script>
+</body>
+</html>

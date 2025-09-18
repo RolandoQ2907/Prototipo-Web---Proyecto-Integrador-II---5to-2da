@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HomeTels - Principal</title>
+  <link rel="stylesheet" href="../../css/pags_styles/menu_client1.css" />
+</head>
+<body>
+  <div class="circles-container"></div>
+  <button id="btn-back" title="Regresar">←</button>
+
+  <header>
+    <img src="../../images/big_logo.png"/>
+    <nav class="main-nav">
+      <button class="nav-btn" data-seccion="home">Home</button>
+      <button class="nav-btn" data-seccion="reservar">Reservar</button>
+      <button class="nav-btn" data-seccion="pagos">Pagos</button>
+      <button class="nav-btn" data-seccion="contacto">Contacto</button>
+    </nav>
+    <button id="login-btn">Login</button>
+  </header>
+
+  <main class="container-general">
+    <!-- Sección Home -->
+    <section id="home" class="seccion-activa seccion">
+      <h2>Localidades de HomeTels, Argentina</h2>
+      <div class="matriz-botones">
+        <button data-img="../../images/ciudades/BsAs.png">Buenos Aires</button>
+        <button data-img="../../images/ciudades/Cordoba.png">Córdoba</button>
+        <button data-img="../../images/ciudades/Rosario.png">Rosario</button>
+        <button data-img="../../images/ciudades/Mendoza.png">Mendoza</button>
+
+        <button data-img="../../images/ciudades/LaPlata.png">La Plata</button>
+        <button data-img="../../images/ciudades/MarDelPlata.png">Mar del Plata</button>
+        <button data-img="../../images/ciudades/Salta.png">Salta</button>
+        <button data-img="../../images/ciudades/Tucuman.png">Tucumán</button>
+
+        <button data-img="../../images/ciudades/Neuquen.png">Neuquén</button>
+        <button data-img="../../images/ciudades/SanJuan.png">San Juan</button>
+        <button data-img="../../images/ciudades/Resistencia.png">Resistencia</button>
+        <button data-img="../../images/ciudades/SantaFe.png">Santa Fe</button>
+
+        <button data-img="../../images/ciudades/Corrientes.png">Corrientes</button>
+        <button data-img="../../images/ciudades/Posadas.png">Posadas</button>
+        <button data-img="../../images/ciudades/Bariloche.png">Bariloche</button>
+        <button data-img="../../images/ciudades/Parana.png">Paraná</button>
+      </div>
+    </section>
+    <hr/>
+
+    <!-- Sección Reservar -->
+    <section id="reservar" class="seccion">
+      <h2>Reservá tu estadía con nosotros</h2>
+      <p>Disfrutá de una experiencia inolvidable con HomeTels. Reserva ahora y asegura tu lugar.</p>
+      <button id="btn-reservar">Reservar ahora</button>
+    </section>
+
+    <hr/>
+    <!-- Sección Pagos -->
+    <section id="pagos" class="seccion">
+      <h2>Formas de Pago</h2>
+      <p>Aceptamos tarjetas Visa, Mastercard, American Express y transferencias bancarias. Pago seguro y confiable.</p>
+      <div id="img-pagos">
+        <img id="visa" src="../../images/tarjets/visa-logo.png"/>
+        <img id="MasterC" src="../../images/tarjets/mastercad-logo.png"/>
+        <img id="AE" src="../../images/tarjets/AE-logo.png"/>
+        <img id="TB" src="../../images/tarjets/transfB-logo.png"/>
+      </div>
+    </section>
+  </main>
+
+  <script src="../../js/bg_images.js"></script>
+  <script src="../../js/bg.js"></script>
+  <script src="../../js/clients.js"></script>
+</body>
+
+<footer class="footer-contacto">
+  <div class="container-footer">
+    <div id="text-contact">
+      <h2>Contacto</h2>
+      <p>
+        Para consultas y reservas, comunícate con nosotros:<br />
+        Teléfono: +34 623 94 72 38<br />
+        Email: soporte.hometels@gmail.com<br />
+        Dirección: Plaza Ramón de la Sota 4, 4º, 407. Puerto de Sagunto.
+      </p>
+    </div>
+
+    <form id="contact-form" action="#" method="POST" novalidate>
+
+      <div id="camp-name" class="form-row">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" required />
+      </div>
+
+      <div id="camp-mail" class="form-row">
+        <input type="email" id="email" name="email" placeholder="Mail" required />
+      </div>
+      
+      <div id="camp-tel" class="form-row">
+        <input type="tel" id="telefono" name="telefono" placeholder="Telefono"/>
+      </div>
+
+      <div id="camp-msj" class="form-row">
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Mensaje" required></textarea>
+      </div>
+
+      <button type="submit" id="btn-enviar">Enviar</button>
+    </form>
+  </div>
+</footer>
+</html>

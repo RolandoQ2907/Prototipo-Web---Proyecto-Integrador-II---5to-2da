@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hotel Admin Panel</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Estilos para estado de habitaciones y reservas */
+  .status-available { background-color: #dcfce7; color: #166534; }
+  .status-occupied { background-color: #dbeafe; color: #1e40af; }
+  .status-maintenance { background-color: #fee2e2; color: #b91c1c; }
+  .status-cleaning { background-color: #fef3c7; color: #a16207; }
+  .status-confirmed { background-color: #dcfce7; color: #166534; }
+  .status-pending { background-color: #fef3c7; color: #a16207; }
+  .status-cancelled { background-color: #fee2e2; color: #b91c1c; }
+  .status-checkedin { background-color: #dbeafe; color: #1e40af; }
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+<!-- Header -->
+<header class="bg-white border-b border-gray-200 p-4 flex justify-between items-center">
+  <div class="flex items-center">
+    <span class="text-3xl mr-3">🛏️</span>
+    <h1 class="text-xl font-bold text-gray-900">Hotel Hometels - Panel Administrativo</h1>
+  </div>
+  <div class="flex items-center space-x-4">
+    <span class="text-2xl cursor-pointer">🔔</span>
+    <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">JD</div>
+      <span class="text-sm font-medium text-gray-700">Juan Doe</span>
+    </div>
+  </div>
+</header>
+
+<div class="flex">
+
+  <!-- Sidebar -->
+  <nav class="w-64 bg-white shadow-sm border-r border-gray-200 min-h-screen p-4 space-y-1">
+    <button data-tab="dashboard" class="tab-button w-full flex items-center px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">📈 Dashboard</button>
+    <button data-tab="rooms" class="tab-button w-full flex items-center px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">🛏️ Habitaciones</button>
+    <button data-tab="reservations" class="tab-button w-full flex items-center px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">📅 Reservas</button>
+    <button data-tab="reports" class="tab-button w-full flex items-center px-4 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">📊 Reportes</button>
+    <button class="w-full flex items-center px-4 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900" disabled>💳 Pagos</button>
+    <button class="w-full flex items-center px-4 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900" disabled>👥 Huéspedes</button>
+    <button class="w-full flex items-center px-4 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900" disabled>⚙️ Configuración</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8">
+    <!-- Contenedor para pestañas -->
+    <div id="dashboard" class="tab-content hidden space-y-6">
+
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-lg border p-6 flex justify-between items-center">
+          <div>
+            <p class="text-gray-600 text-sm">Ocupación</p>
+            <p class="text-2xl font-bold text-blue-600" id="stat-occupancy">68%</p>
+          </div>
+          <span class="text-4xl">📈</span>
+        </div>
+        <div class="bg-white rounded-lg border p-6 flex justify-between items-center">
+          <div>
+            <p class="text-gray-600 text-sm">Habitaciones Disponibles</p>
+            <p class="text-2xl font-bold text-green-600" id="stat-availableRooms">18</p>
+          </div>
+          <span class="text-4xl">🛏️</span>
+        </div>
+        <div class="bg-white rounded-lg border p-6 flex justify-between items-center">
+          <div>
+            <p class="text-gray-600 text-sm">Ingresos del Día</p>
+            <p class="text-2xl font-bold text-purple-600" id="stat-revenue">$285,000</p>
+          </div>
+          <span class="text-4xl">💲</span>
+        </div>
+        <div class="bg-white rounded-lg border p-6 flex justify-between items-center">
+          <div>
+            <p class="text-gray-600 text-sm">Llegadas Hoy</p>
+            <p class="text-2xl font-bold text-orange-600" id="stat-arrivalsToday">7</p>
+          </div>
+          <span class="text-4xl">👥</span>
+        </div>
+      </div>
+
+      <!-- Acciones Rápidas -->
+      <section class="bg-white rounded-lg border p-6">
+        <h3 class="text-lg font-semibold mb-4">Acciones Rápidas</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button class="flex items-center p-4 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors">
+            <span class="text-2xl mr-3">✅</span>
+            <div class="text-left">
+              <p class="font-medium">Check-ins Pendientes</p>
+              <p class="text-sm text-gray-600">5 huéspedes esperando</p>
+            </div>
+          </button>
+          <button class="flex items-center p-4 border border-green-200 rounded-lg hover:bg-green-50 transition-colors">
+            <span class="text-2xl mr-3">❌</span>
+            <div class="text-left">
+              <p class="font-medium">Check-outs de Hoy</p>
+              <p class="text-sm text-gray-600">3 salidas programadas</p>
+            </div>
+          </button>
+          <button class="flex items-center p-4 border border-yellow-200 rounded-lg hover:bg-yellow-50 transition-colors">
+            <span class="text-2xl mr-3">⚠️</span>
+            <div class="text-left">
+              <p class="font-medium">Habitaciones en Limpieza</p>
+              <p class="text-sm text-gray-600">2 habitaciones</p>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- Actividad Reciente -->
+      <section class="bg-white rounded-lg border p-6">
+        <h3 class="text-lg font-semibold mb-4">Actividad Reciente</h3>
+        <div class="space-y-3 text-sm text-gray-700">
+          <div class="flex justify-between items-center border-b border-gray-100 py-2">
+            <div class="flex items-center gap-2"><span>✅</span> Check-in completado - Habitación 205</div>
+            <small class="text-gray-500">hace 5 min</small>
+          </div>
+          <div class="flex justify-between items-center border-b border-gray-100 py-2">
+            <div class="flex items-center gap-2"><span>🔔</span> Nueva reserva - Ana Martínez</div>
+            <small class="text-gray-500">hace 15 min</small>
+          </div>
+          <div class="flex justify-between items-center py-2">
+            <div class="flex items-center gap-2"><span>❌</span> Check-out - Habitación 301</div>
+            <small class="text-gray-500">hace 1 hora</small>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="rooms" class="tab-content hidden space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h2 class="text-xl font-semibold">Gestión de Habitaciones</h2>
+        <button id="btn-update-status" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Actualizar Estados</button>
+      </div>
+      <div class="bg-white rounded-lg border overflow-hidden p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4" id="rooms-list">
+        <!-- Habitaciones se insertan aquí dinamicamente -->
+      </div>
+    </div>
+
+    <div id="reservations" class="tab-content hidden space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h2 class="text-xl font-semibold">Gestión de Reservas</h2>
+        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Nueva Reserva</button>
+      </div>
+      <!-- Filtros -->
+      <div class="bg-white rounded-lg border p-4">
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex-1 relative">
+            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg">🔍</span>
+            <input type="text" id="searchInput" placeholder="Buscar por huésped o habitación..." class="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+          </div>
+          <select id="statusFilter" class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="all">Todos los Estados</option>
+            <option value="confirmed">Confirmadas</option>
+            <option value="pending">Pendientes</option>
+            <option value="checkedin">Check-in</option>
+          </select>
+          <button id="btnExport" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">⬇️ Exportar</button>
+        </div>
+      </div>
+      <!-- Tabla Reservas -->
+      <div class="bg-white rounded-lg border overflow-x-auto">
+        <table class="min-w-full">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Huésped</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Habitación</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fechas</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Canal</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="reservationsTableBody" class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="reports" class="tab-content hidden space-y-6">
+      <h2 class="text-xl font-semibold">Reportes y Analytics</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Ocupación Mensual -->
+        <div class="bg-white rounded-lg border p-6">
+          <h3 class="font-semibold mb-4">Ocupación Mensual</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-600">Septiembre 2024</span>
+              <span class="font-semibold text-blue-600" id="report-occupancy">68%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div class="bg-blue-600 h-2 rounded-full" style="width: 68%;"></div>
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-sm">
+              <div><p class="text-gray-600">Promedio</p><p class="font-semibold">65%</p></div>
+              <div><p class="text-gray-600">Mejor día</p><p class="font-semibold">95%</p></div>
+              <div><p class="text-gray-600">ADR</p><p class="font-semibold">$8,500</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ingresos -->
+        <div class="bg-white rounded-lg border p-6">
+          <h3 class="font-semibold mb-4">Ingresos por Canal</h3>
+          <div class="space-y-3 text-gray-700">
+            <div class="flex justify-between items-center"><span>Directo</span><span class="font-semibold">$158,000</span></div>
+            <div class="flex justify-between items-center"><span>Booking.com</span><span class="font-semibold">$89,000</span></div>
+            <div class="flex justify-between items-center"><span>Expedia</span><span class="font-semibold">$38,000</span></div>
+            <div class="border-t pt-2 flex justify-between items-center font-semibold"><span>Total</span><span>$285,000</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones Exportar -->
+      <div class="bg-white rounded-lg border p-6">
+        <h3 class="font-semibold mb-4">Exportar Reportes</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button class="flex items-center justify-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">⬇️ Reporte Mensual</button>
+          <button class="flex items-center justify-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">⬇️ Reporte de Ocupación</button>
+          <button class="flex items-center justify-center p-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">⬇️ Reporte Financiero</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Datos simulados
+  const mockRooms = [
+    { id: 1, number: '101', type: 'Estándar', status: 'occupied', guest: 'Juan Pérez', checkout: '2024-09-18' },
+    { id: 2, number: '102', type: 'Estándar', status: 'available', guest: null, checkout: null },
+    { id: 3, number: '201', type: 'Superior', status: 'maintenance', guest: null, checkout: null },
+    { id: 4, number: '301', type: 'Suite', status: 'occupied', guest: 'María García', checkout: '2024-09-17' },
+    { id: 5, number: '302', type: 'Suite', status: 'cleaning', guest: null, checkout: null },
+  ];
+
+  const mockReservations = [
+    { id: 1, guest: 'Carlos Rodriguez', room: '205', checkin: '2024-09-16', checkout: '2024-09-20', status: 'confirmed', total: 45000, channel: 'direct' },
+    { id: 2, guest: 'Ana Martínez', room: '103', checkin: '2024-09-17', checkout: '2024-09-19', status: 'pending', total: 28000, channel: 'booking' },
+    { id: 3, guest: 'Roberto Silva', room: '401', checkin: '2024-09-18', checkout: '2024-09-22', status: 'checkedin', total: 78000, channel: 'direct' }
+  ];
+
+  // Estado del filtro y búsqueda
+  let searchTerm = '';
+  let statusFilter = 'all';
+
+  // Funciones para color y texto de estados
+  function getStatusColor(status) {
+    switch (status) {
+      case 'available': return 'status-available';
+      case 'occupied': return 'status-occupied';
+      case 'maintenance': return 'status-maintenance';
+      case 'cleaning': return 'status-cleaning';
+      case 'confirmed': return 'status-confirmed';
+      case 'pending': return 'status-pending';
+      case 'cancelled': return 'status-cancelled';
+      case 'checkedin': return 'status-checkedin';
+      default: return '';
+    }
+  }
+  function getStatusText(status) {
+    switch (status) {
+      case 'available': return 'Disponible';
+      case 'occupied': return 'Ocupada';
+      case 'maintenance': return 'Mantenimiento';
+      case 'cleaning': return 'Limpieza';
+      case 'confirmed': return 'Confirmada';
+      case 'pending': return 'Pendiente';
+      case 'cancelled': return 'Cancelada';
+      case 'checkedin': return 'Check-in';
+      default: return status;
+    }
+  }
+
+  // Renderizar lista de habitaciones con select para modificar estado
+  function renderRooms() {
+    const container = document.getElementById('rooms-list');
+    container.innerHTML = '';
+    mockRooms.forEach(room => {
+      const div = document.createElement('div');
+      div.className = 'border rounded-lg p-4 hover:shadow-md transition-shadow cursor-default';
+
+      const statusClass = getStatusColor(room.status);
+
+      div.innerHTML = `
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="font-semibold text-lg">Hab. ${room.number}</h4>
+          <span class="px-2 py-1 text-xs rounded-full ${statusClass}">${getStatusText(room.status)}</span>
+        </div>
+        <p class="text-sm text-gray-600 mb-2">${room.type}</p>
+        ${room.guest ? `<div class="mb-3">
+          <p class="text-sm font-medium">${room.guest}</p>
+          ${room.checkout ? `<p class="text-xs text-gray-500">Salida: ${room.checkout}</p>` : ''}
+        </div>` : ''}
+        <div class="flex gap-1">
+          <select class="flex-1 text-xs border rounded px-2 py-1" data-room-id="${room.id}">
+            <option value="available" ${room.status === 'available' ? 'selected' : ''}>Disponible</option>
+            <option value="occupied" ${room.status === 'occupied' ? 'selected' : ''}>Ocupada</option>
+            <option value="cleaning" ${room.status === 'cleaning' ? 'selected' : ''}>Limpieza</option>
+            <option value="maintenance" ${room.status === 'maintenance' ? 'selected' : ''}>Mantenimiento</option>
+          </select>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+
+    // Escuchar cambios en selects
+    container.querySelectorAll('select').forEach(select => {
+      select.addEventListener('change', (e) => {
+        const roomId = parseInt(e.target.getAttribute('data-room-id'));
+        const newStatus = e.target.value;
+        const room = mockRooms.find(r => r.id === roomId);
+        if(room) {
+          room.status = newStatus;
+          renderRooms();
+        }
+      });
+    });
+  }
+
+  // Renderizar tabla de reservas con filtro
+  function renderReservations() {
+    const tbody = document.getElementById('reservationsTableBody');
+    tbody.innerHTML = '';
+
+    let filtered = mockReservations.filter(r => {
+      const matchesSearch = r.guest.toLowerCase().includes(searchTerm.toLowerCase()) || r.room.includes(searchTerm);
+      const matchesStatus = statusFilter === 'all' || r.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+
+    filtered.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-gray-50';
+      const statusClass = getStatusColor(r.status);
+      const statusText = getStatusText(r.status);
+
+      tr.innerHTML = `
+        <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm font-medium text-gray-900">${r.guest}</div></td>
+        <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${r.room}</div></td>
+        <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">${r.checkin} - ${r.checkout}</div></td>
+        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs rounded-full ${statusClass}">${statusText}</span></td>
+        <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm font-medium text-gray-900">$${r.total.toLocaleString()}</div></td>
+        <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900 capitalize">${r.channel}</div></td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+          <div class="flex gap-2">
+            <button title="Ver detalles" class="text-blue-600 hover:text-blue-900">👁️</button>
+            <button title="Editar reserva" class="text-green-600 hover:text-green-900">✏️</button>
+            <button title="Eliminar reserva" class="text-red-600 hover:text-red-900">🗑️</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Manejo de pestañas
+  function showTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.getElementById(tabName).classList.remove('hidden');
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      if (button.getAttribute('data-tab') === tabName) {
+        button.classList.add('bg-blue-100', 'text-blue-700');
+        button.classList.remove('text-gray-600');
+      } else {
+        button.classList.remove('bg-blue-100', 'text-blue-700');
+        button.classList.add('text-gray-600');
+      }
+    });
+  }
+
+  // Inicializar app
+  document.addEventListener('DOMContentLoaded', () => {
+    renderRooms();
+    renderReservations();
+    showTab('dashboard');
+  });
+
+  // Escuchar botones pestañas
+  document.querySelectorAll('.tab-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.getAttribute('data-tab');
+      showTab(tab);
+    });
+  });
+
+  // Escuchar filtro y búsqueda reserva
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchTerm = e.target.value;
+    renderReservations();
+  });
+  document.getElementById('statusFilter').addEventListener('change', e => {
+    statusFilter = e.target.value;
+    renderReservations();
+  });
+
+  // Botón actualizar estados (demo sin backend)
+  document.getElementById('btn-update-status').addEventListener('click', () => {
+    alert('Estados de habitaciones actualizados (simulado).');
+  });
+
+  // Botón exportar reservas (demo)
+  document.getElementById('btnExport').addEventListener('click', () => {
+    alert('Exportar reservas (simulado).');
+  });
+
+</script>
+
+</body>
+</html>

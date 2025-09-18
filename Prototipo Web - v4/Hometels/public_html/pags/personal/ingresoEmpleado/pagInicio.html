@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil Empleado - HomeTels</title>
+  <link rel="stylesheet" href="../../../css/PersonalPagsStyles/inicioStyle.css" />
+  
+</head>
+<header>
+    <img src="../../../images/big_logo.png" alt="Logo del Hotel HomeTels" />
+  </header>
+<body>
+    <div class="circles-container"></div>
+  <main class="container-profile">
+    <img class="profile-photo" src="../../../images/icons/icon_personal.png" alt="Foto del empleado" />
+    <div class="profile-name">Juan Pérez</div>
+    <div class="welcome-message">
+      Querido Juan, nos alegra que haya iniciado sesión para empezar a hacerse cargo del hotel que le corresponde. Como parte fundamental de nuestra familia HomeTels, queremos que sepa que valoramos mucho su compromiso, dedicación y profesionalismo. 
+      <br/><br/>
+      Estamos convencidos de que con su esfuerzo y responsabilidad, lograremos brindar la mejor experiencia a nuestros huéspedes y mantener la excelencia en la administración de las habitaciones y servicios del hotel. Su aporte es clave para el éxito de nuestro equipo.
+      <br/><br/>
+      Le deseamos mucho éxito en esta nueva etapa y queremos que sepa que aquí encontrará apoyo, crecimiento y reconocimiento. ¡Bienvenido a nuestra compañía, estamos felices de contar con usted!
+    </div>
+    <button id="admin-start">Empezar a administrar</button>
+    <script>
+      document.getElementById('admin-start').addEventListener('click', () => {
+        window.location.href = '../../../pags/personal/ingresoEmpleado/PagAdminis/pagAdmin.html';
+      });
+    </script>
+  </main>
+
+  <script src="../../../js/bg1.js"></script>
+  <script src="../../../js/namePag.js"></script>
+</body>
+</html>
